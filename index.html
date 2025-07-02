@@ -1,12 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Detector de Frutas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detector de Frutas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    
+<body class="bg-gradient-to-tr from-lime-100 via-yellow-100 to-orange-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="bg-white shadow-lg rounded-xl p-8 max-w-md w-full space-y-6">
+    <h1 class="text-3xl font-bold text-center text-orange-500">Detector de Frutas </h1>
+
+    <div class="flex justify-center">
+      <video id="webcam" autoplay playsinline class="w-64 h-48 rounded-lg border shadow"></video>
+    </div>
+
+    <div class="flex justify-center">
+      <button id="predict-btn" class="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md transition">
+        Predecir Fruta
+      </button>
+    </div>
+
+    <div id="prediction" class="text-center text-lg font-semibold text-green-600">
+      
+    </div>
+  </div>
+
+  <!-- <script src="script.js"></script> -->
 </body>
 </html>
