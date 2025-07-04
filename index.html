@@ -12,57 +12,49 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-tr from-lime-100 via-green-100 to-orange-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gradient-to-tr from-lime-100 via-yellow-100 to-orange-100 min-h-screen flex items-center justify-center p-4">
 
-  <!-- Contenedor principal -->
-  <div class="flex flex-col md:flex-row gap-8 items-start">
+  <!-- Tarjeta principal con todo -->
+  <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md space-y-6 border border-gray-100">
 
-    <!-- Tarjeta izquierda (principal) -->
-    <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md space-y-6 border border-gray-100">
-      <h1 class="text-3xl font-bold text-center text-orange-500">
-        Detector de Frutas
-      </h1>
+    <!-- Título -->
+    <h1 class="text-3xl font-bold text-center text-orange-500">
+      Detector de Frutas
+    </h1>
 
-      <!-- Video -->
-      <div class="flex justify-center">
-        <video id="webcam" autoplay playsinline class="w-80 h-60 rounded-2xl border-2 border-gray-300 shadow-lg transition-all duration-300"></video>
-
-      </div>
-
-      <!-- Botón -->
-      <div class="flex justify-center">
-        <button id="predict-btn" class="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition duration-300 shadow">
-          Predecir Fruta
-        </button>
-      </div>
-
-      <!-- Resultado -->
-      <div id="prediction" class="border-2 border-dashed border-green-400 bg-green-50 text-green-700 p-4 rounded-md text-center text-lg font-semibold shadow-inner min-h-[3rem]">
-        Esperando predicción...
-      </div>
-
-      <!-- Cargando -->
-      <div id="loading" class="text-yellow-600 animate-pulse text-center hidden">
-        ⏳ Procesando...
-      </div>
-
-      <!-- Reiniciar -->
-      <div class="text-center">
-        <button onclick="location.reload()" class="text-sm text-gray-500 underline mt-4">
-          Reiniciar
-        </button>
-      </div>
+    <!-- Video más grande -->
+    <div class="flex justify-center">
+      <video id="webcam" autoplay playsinline class="w-96 h-72 rounded-2xl border-2 border-gray-300 shadow-lg transition-all duration-300"></video>
     </div>
 
-    <!-- Tarjeta derecha (historial) -->
-    <div class="bg-white shadow-xl border border-gray-200 rounded-2xl p-6 w-full md:w-72 max-h-[400px] overflow-y-auto">
-      <div class="flex items-center gap-2 mb-3">
-        <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-        <h2 class="text-lg font-semibold text-gray-700">Historial</h2>
-      </div>
-      <ul id="historial" class="list-disc list-inside text-gray-600 text-sm space-y-1"></ul>
+    <!-- Botón -->
+    <div class="flex justify-center">
+      <button id="predict-btn" class="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition duration-300 shadow">
+        Predecir Fruta
+      </button>
+    </div>
+
+    <!-- Resultado -->
+    <div id="prediction" class="border-2 border-dashed border-green-400 bg-green-50 text-green-700 p-4 rounded-md text-center text-lg font-semibold shadow-inner min-h-[3rem]">
+      Esperando predicción...
+    </div>
+
+    <!-- Cargando -->
+    <div id="loading" class="text-yellow-600 animate-pulse text-center hidden">
+       Procesando..
+    </div>
+
+    <!-- Historial dentro de la misma tarjeta -->
+    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 max-h-48 overflow-y-auto shadow-sm">
+      <h2 class="text-md font-bold text-gray-600 mb-2">Historial de Predicciones:</h2>
+      <ul id="historial" class="list-disc list-inside text-gray-700 text-sm space-y-1"></ul>
+    </div>
+
+    <!-- Reiniciar -->
+    <div class="text-center">
+      <button onclick="location.reload()" class="text-sm text-gray-500 underline mt-4">
+        Reiniciar
+      </button>
     </div>
 
   </div>
