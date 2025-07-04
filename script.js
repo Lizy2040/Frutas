@@ -11,3 +11,15 @@ async function initCamera() {
 }
 
 initCamera();
+
+
+//Simulacion de detecccion de frutas
+
+const predictBtn = document.getElementById("predict-btn");
+const predictionBox = document.getElementById("prediction");
+const loading = document.getElementById("loading");
+
+predictBtn.addEventListener("click", () => {
+  loading.classList.remove("hidden");
+  predictionBox.textContent = " Detectando...";
+});
