@@ -23,3 +23,10 @@ predictBtn.addEventListener("click", () => {
   loading.classList.remove("hidden");
   predictionBox.textContent = " Detectando...";
 });
+
+
+//Nota 1: Añadir emojis para mejor presentacion visual
+
+
+
+//Se debera de agregar un script para cambio de color de fondo segun con lo que se detecte
