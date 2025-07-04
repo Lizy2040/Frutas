@@ -21,11 +21,36 @@
       </button>
     </div>
 
+    <!-- Resultado de predicción -->
     <div id="prediction" class="border-2 border-dashed border-green-400 bg-green-50 text-green-700 p-4 rounded-md text-center text-lg font-semibold shadow-inner min-h-[3rem]">
       Esperando predicción...
     </div>
-  </div>
 
-  <!-- <script src="script.js"></script> -->
+    <!-- Cargando -->
+    <div id="loading" class="text-yellow-600 animate-pulse text-center hidden">
+      ⏳ Procesando...
+    </div>
+
+    <!-- Historial -->
+    <div class="mt-6">
+      <h2 class="text-md font-bold text-gray-600">Historial:</h2>
+      <ul id="historial" class="list-disc list-inside text-gray-700 text-sm text-left"></ul>
+    </div>
+
+    <!-- Reiniciar -->
+    <div class="text-center">
+      <button onclick="location.reload()" class="text-sm text-gray-500 underline mt-4">
+        Reiniciar
+      </button>
+    </div>
+
+
+
+
+
+
+
+
+   <script src="script.js"></script> 
 </body>
 </html>
