@@ -1,17 +1,18 @@
 const URL = "./model/";
-let model, webcam, maxPredicions;
+let model, webcam, maxPredictions;
 
 const predictBtn = document.getElementById("predict-btn");
 const predictionBox = document.getElementById("prediction");
-const loadingText = document.getElementById("loadin");
-const historyList = document.getElementById("webcam");
+const loadingText = document.getElementById("loading");
+const historyList = document.getElementById("historial");
+const videoElement = document.getElementById("webcam");
 
 async function init() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
     model = await tmImage.load(modelURL, metadataURL);
-    maxPredicions = model.getTotalClasses();
+    maxPredictions = model.getTotalClasses();
 
     webcam = new tmImage.Webcam(300, 300, true);
     await webcam.setup();
@@ -39,10 +40,10 @@ async function predict() {
         if (p.probability > topProbability) {
             topProbability = p.probability;
             topClass = p.className;
-        } 
+        }
     });
 
-    const procentaje = (topProbability * 100).toFixed(1);
+    const porcentaje = (topProbability * 100).toFixed(1);
     predictionBox.textContent = `Fruta detectada: ${topClass} (${porcentaje}%)`;
 
     const li = document.createElement("li");
