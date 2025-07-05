@@ -67,7 +67,8 @@ predictBtn.addEventListener("click", async () => {
   const emoji = frutas[fruta] || "❓";
 
   // mostrar resultado en pantalla
-  predictionBox.textContent = `${emoji} ${fruta}`;
+predictionBox.textContent = `${emoji} ${fruta} (${(best.probability * 100).toFixed(1)}%)`;
+
   predictionBox.className =
     "text-center text-lg font-semibold min-h-[3rem] p-4 rounded-md shadow-inner";
 
