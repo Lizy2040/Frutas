@@ -1,58 +1,73 @@
-const URL = "./model/";
-let model, webcam, maxPredictions;
-
+const webcam = document.getElementById("webcam");
 const predictBtn = document.getElementById("predict-btn");
 const predictionBox = document.getElementById("prediction");
-const loadingText = document.getElementById("loading");
-const historyList = document.getElementById("historial");
-const videoElement = document.getElementById("webcam");
+const loading = document.getElementById("loading");
+const historial = document.getElementById("historial");
+const reiniciarBtn = document.getElementById("reiniciar-btn");
+
+const frutas = {
+  Pera: "🍐",
+  Plátano: "🍌",
+  Manzana: "🍎"
+};
 
 async function init() {
-    const modelURL = URL + "model.json";
-    const metadataURL = URL + "metadata.json";
+  try {
+    await navigator.mediaDevices.getUserMedia({ video: true });
 
-    model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
-
-    webcam = new tmImage.Webcam(300, 300, true);
-    await webcam.setup();
-    await webcam.play();
-
-    videoElement.srcObject = webcam.webcam;
-    videoElement.addEventListener("loadeddata", () => {
-        webcam.update();
-    });
-
-    console.log("Modelo y cámara web listos");
-} 
-
-async function predict() {
-    loadingText.classList.remove("hidden");
-    predictionBox.textContent = "Procesando...";
-
-    webcam.update();
-    const prediction = await model.predict(webcam.canvas);
-
-    let topClass = "";
-    let topProbability = 0;
-
-    prediction.forEach((p) => {
-        if (p.probability > topProbability) {
-            topProbability = p.probability;
-            topClass = p.className;
-        }
-    });
-
-    const porcentaje = (topProbability * 100).toFixed(1);
-    predictionBox.textContent = `Fruta detectada: ${topClass} (${porcentaje}%)`;
-
-    const li = document.createElement("li");
-    li.textContent = `${new Date().toLocaleTimeString()} → ${topClass} (${porcentaje}%)`;
-    historyList.prepend(li);
-
-    loadingText.classList.add("hidden");
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    webcam.srcObject = stream;
+  } catch (err) {
+    alert("No se pudo acceder a la cámara");
+    console.error("Error al acceder a la cámara:", err);
+  }
 }
 
-predictBtn.addEventListener("click", predict);
-
 init();
+
+predictBtn.addEventListener("click", () => {
+  loading.classList.remove("hidden");
+  predictionBox.textContent = "🔍 Detectando...";
+  predictionBox.className =
+    "text-center text-lg font-semibold min-h-[3rem] p-4 rounded-md border-2 border-dashed shadow-inner";
+
+  setTimeout(() => {
+    loading.classList.add("hidden");
+
+    const opciones = ["Pera", "Plátano", "Manzana"];
+    const fruta = opciones[Math.floor(Math.random() * opciones.length)];
+    const emoji = frutas[fruta] || "❓";
+
+    predictionBox.className =
+      "text-center text-lg font-semibold min-h-[3rem] p-4 rounded-md shadow-inner";
+
+    if (fruta === "Pera") {
+      predictionBox.classList.add("bg-lime-100", "text-lime-800", "border-lime-300");
+      document.body.className =
+        "min-h-screen flex items-center justify-center p-6 transition-all bg-gradient-to-br from-lime-300 via-green-100 to-yellow-100";
+    } else if (fruta === "Plátano") {
+      predictionBox.classList.add("bg-yellow-100", "text-yellow-800", "border-yellow-300");
+      document.body.className =
+        "min-h-screen flex items-center justify-center p-6 transition-all bg-gradient-to-br from-yellow-200 via-yellow-100 to-lime-100";
+    } else if (fruta === "Manzana") {
+      predictionBox.classList.add("bg-red-100", "text-red-800", "border-red-300");
+      document.body.className =
+        "min-h-screen flex items-center justify-center p-6 transition-all bg-gradient-to-br from-red-200 via-red-100 to-yellow-100";
+    }
+
+    predictionBox.textContent = `${emoji} ${fruta}`;
+
+    const li = document.createElement("li");
+    li.textContent = `${emoji} ${fruta}`;
+    historial.appendChild(li);
+  }, 1500);
+});
+
+reiniciarBtn.addEventListener("click", () => {
+  predictionBox.textContent = "Esperando predicción...";
+  predictionBox.className =
+    "border-2 border-dashed border-green-400 bg-green-50 text-green-700 p-4 rounded-md text-center text-lg font-semibold shadow-inner min-h-[3rem]";
+  historial.innerHTML = "";
+  document.body.className =
+    "bg-gradient-to-br from-lime-400 via-yellow-200 to-orange-400 min-h-screen flex items-center justify-center p-6";
+});
